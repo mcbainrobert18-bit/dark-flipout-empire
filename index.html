@@ -4,48 +4,113 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dark Flipout v2 — Unleash the Flipout</title>
-<meta name="description" content="Educational RF & firmware lab product line. Authorized lab use only.">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+<meta name="description" content="Educational RF & firmware lab product line. Flipper Zero, ESP32, 3D print, AI Legion prompts. Authorized lab use only.">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#06060a;--panel:#0e0e16;--accent:#ff0033;--text:#ececf4;--muted:#6b6b88;--gold:#ffc832;--success:#00ff88}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(255,0,51,.12),transparent 50%);pointer-events:none}
 .wrap{max-width:960px;margin:0 auto;padding:2rem;position:relative;z-index:1}
-h1{font-family:'Orbitron',sans-serif;color:var(--accent);font-size:clamp(1.8rem,5vw,3rem);letter-spacing:4px}
+h1{font-family:'Orbitron',sans-serif;color:var(--accent);font-size:clamp(1.8rem,5vw,3rem);letter-spacing:4px;text-shadow:0 0 40px rgba(255,0,51,.4)}
 .sub{color:var(--muted);font-size:1.2rem;margin:.5rem 0 2rem}
 .cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin:2rem 0}
-.btn{font-family:'Orbitron',sans-serif;font-size:.75rem;letter-spacing:2px;padding:.9rem 1.6rem;border-radius:8px;text-decoration:none;display:inline-block}
+.btn{font-family:'Orbitron',sans-serif;font-size:.75rem;letter-spacing:2px;padding:.9rem 1.6rem;border-radius:8px;text-decoration:none;display:inline-block;transition:all .25s}
 .btn-primary{background:var(--accent);color:#000;font-weight:700}
+.btn-primary:hover{filter:brightness(1.1);box-shadow:0 0 30px rgba(255,0,51,.5)}
+.btn-outline{border:1px solid var(--accent);color:var(--accent)}
 .btn-gold{background:var(--gold);color:#000;font-weight:700}
 .btn-free{border:1px solid var(--success);color:var(--success)}
-.btn-outline{border:1px solid var(--accent);color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin:2rem 0}
+section{margin:3rem 0}
+h2{font-family:'Orbitron',sans-serif;font-size:.8rem;letter-spacing:3px;color:var(--muted);margin-bottom:1rem;border-left:3px solid var(--accent);padding-left:.6rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
 .card{background:var(--panel);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.5rem}
-.card h3{color:var(--accent);font-family:'Orbitron',sans-serif}
+.card h3{color:var(--accent);font-family:'Orbitron',sans-serif;font-size:1rem;margin-bottom:.5rem}
 .price{font-size:2rem;color:var(--gold);font-family:'Orbitron',sans-serif}
-.warn{background:rgba(255,170,0,.08);border-left:3px solid #ffaa00;padding:1rem;margin:2rem 0;color:#ffaa00}
-footer{text-align:center;padding:2rem;color:var(--muted);border-top:1px solid rgba(255,255,255,.06)}
+.proof{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.proof span{font-size:.8rem;padding:.3rem .8rem;background:var(--panel);border-radius:999px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1rem 0}
+td,th{padding:.6rem;border-bottom:1px solid rgba(255,255,255,.06);text-align:center}
+th{color:var(--accent);font-family:'Orbitron',sans-serif;font-size:.65rem}
+.warn{background:rgba(255,170,0,.08);border-left:3px solid #ffaa00;padding:1rem;margin:2rem 0;font-size:.9rem;color:#ffaa00}
+footer{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);margin-top:3rem}
 footer a{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
-<p style="font-family:Orbitron;font-size:.65rem;letter-spacing:4px;color:var(--gold)">DARKONE · FLIPOUT LEGION · 2026</p>
-<h1>UNLEASH THE FLIPOUT</h1>
-<p class="sub">Own the Lab. Ship the Signal. Educational & authorized research only.</p>
-<div class="cta-row">
-<a class="btn btn-primary" href="https://gumroad.com/products/new" target="_blank">Starter — $49</a>
-<a class="btn btn-gold" href="https://gumroad.com/products/new" target="_blank">Operator Kit — $199</a>
-<a class="btn btn-outline" href="portfolio.html">Portfolio Guide</a>
-</div>
-<div class="grid">
-<div class="card"><h3>Starter</h3><div class="price">$49</div><p style="color:var(--muted);margin-top:.5rem">5 lab projects · flash sheets · 25 prompts</p></div>
-<div class="card"><h3>Operator</h3><div class="price">$199</div><p style="color:var(--muted);margin-top:.5rem">12 STLs · pentest lab · 100 prompts · FLIPOUT10</p></div>
-<div class="card"><h3>Masterclass</h3><div class="price">$999</div><p style="color:var(--muted);margin-top:.5rem">12-week cohort · white-label · 8 seats</p></div>
-</div>
-<div class="warn">Educational & authorized lab use only. No pre-flashed attack devices.</div>
-<footer>Dark Flipout © 2026 · <a href="portfolio.html">Portfolio</a></footer>
+  <p style="font-family:Orbitron;font-size:.65rem;letter-spacing:4px;color:var(--gold)">DARKONE · FLIPOUT LEGION · 2026</p>
+  <h1>UNLEASH THE FLIPOUT</h1>
+  <p class="sub">Own the Lab. Ship the Signal. Educational & authorized research only.</p>
+  <div class="proof">
+    <span>5 Lab Projects</span><span>12 STLs</span><span>100 AI Prompts</span><span>Flipper + ESP32</span>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-free" href="Dark_Flipout_Starter_Pack_v2.pdf" download>Free Preview PDF</a>
+    <a class="btn btn-primary" href="https://gumroad.com/products/new" target="_blank" rel="noopener">Get Starter — $49</a>
+    <a class="btn btn-gold" href="https://gumroad.com/products/new" target="_blank" rel="noopener">Operator Kit — $199</a>
+    <a class="btn btn-outline" href="portfolio.html">Portfolio Guide</a>
+  </div>
+
+  <section>
+    <h2>THE PROBLEM</h2>
+    <p style="color:var(--muted);font-size:1.1rem">Discord threads. Dead GitHub forks. STLs that warp on layer 3. You bought the transparent case — you still don't have a <strong style="color:var(--text)">system</strong>. Dark Flipout is the system.</p>
+  </section>
+
+  <section>
+    <h2>CHOOSE YOUR TIER</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Starter Pack</h3>
+        <div class="price">$49</div>
+        <ul style="color:var(--muted);margin-top:1rem;padding-left:1.2rem">
+          <li>5 legal lab projects</li>
+          <li>Flash cheat sheets</li>
+          <li>Bambu PETG profiles</li>
+          <li>25 Legion prompts</li>
+          <li>Notion template</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:rgba(255,0,51,.3)">
+        <h3>Operator Kit</h3>
+        <div class="price">$199</div>
+        <ul style="color:var(--muted);margin-top:1rem;padding-left:1.2rem">
+          <li>Everything in Starter</li>
+          <li>12 STL arsenal</li>
+          <li>Pentest lab scripts</li>
+          <li>Quest 3 HUD skeleton</li>
+          <li>100 prompts + affiliate kit</li>
+        </ul>
+        <p style="margin-top:.8rem;font-size:.8rem;color:var(--gold)">Code: FLIPOUT10 — 10% off 48h</p>
+      </div>
+      <div class="card">
+        <h3>Legion Masterclass</h3>
+        <div class="price">$999</div>
+        <ul style="color:var(--muted);margin-top:1rem;padding-left:1.2rem">
+          <li>12-week live cohort</li>
+          <li>White-label pack</li>
+          <li>Lifetime community</li>
+          <li>1:1 onboarding</li>
+        </ul>
+        <p style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">Application only · 8 seats</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="warn">Educational & authorized lab use only. No pre-flashed attack devices. You flash your own hardware on systems you own or have written permission to test.</div>
+
+  <section>
+    <h2>FAQ</h2>
+    <p><strong>Legal?</strong> Yes — with proper authorization. Full disclaimer included.</p>
+    <p style="margin-top:.5rem"><strong>Crypto?</strong> BTC/XMR invoice available at checkout.</p>
+    <p style="margin-top:.5rem"><strong>Affiliates?</strong> 30% rev share after purchase.</p>
+  </section>
+
+  <footer>
+    Dark Flipout © 2026 · DarkOne Empire<br>
+    <a href="portfolio.html">Investor Portfolio</a> ·
+    <a href="DISCLAIMER.pdf">Disclaimer</a>
+  </footer>
 </div>
 </body>
 </html>

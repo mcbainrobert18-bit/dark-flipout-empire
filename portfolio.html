@@ -1,1 +1,761 @@
-<!DOCTYPE html><html><head><meta charset=UTF-8><meta http-equiv=refresh content="0;url=https://raw.githubusercontent.com/mcbainrobert18-bit/dark-flipout-empire/main/index.html"><title>Portfolio</title></head><body style="background:#06060a;color:#ff0033;font-family:sans-serif;text-align:center;padding:4rem"><p>Full portfolio guide runs locally at EMPIRE_LAUNCHPAD/PORTFOLIO_HOMEGUIDE.html</p><p><a href="index.html" style="color:#ffc832">Back to landing</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkOne Empire — Portfolio Home Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+/* ═══ THEME ENGINE ═══ */
+:root, [data-theme="normal"] {
+  --bg: #06060a; --panel: #0e0e16; --panel2: #14141f;
+  --accent: #ff0033; --neon: #ff1a4a; --text: #ececf4; --muted: #6b6b88;
+  --success: #00ff88; --gold: #ffc832; --purple: #9944ff; --cyan: #00ccff;
+  --grad1: rgba(255,0,51,.15); --grad2: rgba(148,0,211,.08);
+  --font-display: 'Orbitron', sans-serif; --font-body: 'Rajdhani', sans-serif;
+  --radius: 12px; --glow: 0 0 40px rgba(255,0,51,.4);
+}
+[data-theme="conservative"] {
+  --bg: #0a0a0f; --panel: #12121a; --panel2: #1a1a24;
+  --accent: #4a9eff; --neon: #6bb3ff; --text: #d8d8e8; --muted: #7a7a9a;
+  --success: #3dd68c; --gold: #c9a227; --purple: #7b5ea7; --cyan: #5bc0de;
+  --grad1: rgba(74,158,255,.1); --grad2: rgba(61,214,140,.06);
+  --glow: 0 0 30px rgba(74,158,255,.3);
+}
+[data-theme="highend"] {
+  --bg: #030308; --panel: #0a0a12; --panel2: #10101c;
+  --accent: #ffd700; --neon: #ffe566; --text: #f5f0e8; --muted: #9a9080;
+  --success: #50fa7b; --gold: #ffd700; --purple: #bd93f9; --cyan: #8be9fd;
+  --grad1: rgba(255,215,0,.12); --grad2: rgba(189,147,249,.08);
+  --glow: 0 0 60px rgba(255,215,0,.35);
+}
+[data-theme="masterpiece"] {
+  --bg: #020204; --panel: #08080f; --panel2: #0f0f18;
+  --accent: #e8c547; --neon: #f5d76e; --text: #faf6ed; --muted: #a89f8c;
+  --success: #7dcea0; --gold: #e8c547; --purple: #c39bd3; --cyan: #85c1e9;
+  --grad1: rgba(232,197,71,.18); --grad2: rgba(195,155,211,.1);
+  --font-display: 'Playfair Display', serif;
+  --glow: 0 0 80px rgba(232,197,71,.45);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .5s, color .5s;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(ellipse at 20% 0%, var(--grad1), transparent 50%),
+              radial-gradient(ellipse at 80% 100%, var(--grad2), transparent 40%);
+  pointer-events:none; z-index:0;
+}
+.scanline {
+  position:fixed; inset:0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+  pointer-events:none; z-index:9999;
+}
+[data-theme="masterpiece"] .scanline { opacity:.3; }
+.wrap { position:relative; z-index:1; max-width:1280px; margin:0 auto; padding:1.5rem 2rem 4rem; }
+
+/* ═══ HEADER ═══ */
+.hero {
+  text-align:center; padding:2rem 1rem 1.5rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  margin-bottom:2rem;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  color: var(--accent);
+  text-shadow: var(--glow);
+  letter-spacing: clamp(2px, 1vw, 8px);
+  animation: pulse 4s ease infinite;
+}
+@keyframes pulse { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.15)} }
+.hero .tagline { color:var(--muted); font-size:1.15rem; margin:.6rem 0 1.2rem; }
+.hero .owner { font-family:var(--font-display); font-size:.7rem; letter-spacing:4px; color:var(--gold); }
+
+/* ═══ CONTROLS BAR ═══ */
+.controls {
+  display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center;
+  padding:1rem; background:var(--panel); border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.08); margin-bottom:2rem;
+  position:sticky; top:0; z-index:100; backdrop-filter:blur(12px);
+}
+.ctrl-group { display:flex; align-items:center; gap:.4rem; flex-wrap:wrap; }
+.ctrl-label { font-size:.65rem; letter-spacing:2px; color:var(--muted); font-family:var(--font-display); }
+.btn {
+  font-family:var(--font-display); font-size:.65rem; letter-spacing:1px;
+  padding:.45rem 1rem; border-radius:999px; border:1px solid rgba(255,255,255,.15);
+  background:var(--panel2); color:var(--text); cursor:pointer;
+  transition:all .25s; text-decoration:none; display:inline-block;
+}
+.btn:hover, .btn.active { border-color:var(--accent); color:var(--accent); box-shadow:var(--glow); }
+.btn-primary { background:var(--accent); color:#000; border-color:var(--accent); font-weight:700; }
+.btn-primary:hover { filter:brightness(1.1); color:#000; }
+.btn-gold { background:var(--gold); color:#000; border-color:var(--gold); }
+.btn-copy { background:var(--success); color:#000; border-color:var(--success); }
+
+/* ═══ STATS ROW ═══ */
+.stats-row { display:flex; flex-wrap:wrap; gap:.8rem; justify-content:center; margin:1.5rem 0; }
+.stat-pill {
+  background:var(--panel); border:1px solid rgba(255,255,255,.1);
+  border-radius:999px; padding:.5rem 1.2rem;
+  font-family:var(--font-display); font-size:.6rem; letter-spacing:1px;
+}
+.stat-pill span { color:var(--accent); font-weight:700; }
+
+/* ═══ SECTIONS ═══ */
+.section-title {
+  font-family:var(--font-display); font-size:.72rem; letter-spacing:4px;
+  color:var(--muted); margin:2.5rem 0 1rem; padding-left:.6rem;
+  border-left:3px solid var(--accent);
+}
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1.2rem; }
+.card {
+  background:var(--panel); border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius); padding:1.4rem;
+  transition:transform .3s, border-color .3s, box-shadow .3s;
+}
+.card:hover { transform:translateY(-3px); border-color:rgba(255,255,255,.18); box-shadow:var(--glow); }
+.card h3 { font-family:var(--font-display); font-size:.95rem; color:var(--accent); margin-bottom:.5rem; letter-spacing:1px; }
+.card p, .card li { color:var(--muted); font-size:.95rem; line-height:1.55; }
+.card ul { padding-left:1.2rem; margin:.5rem 0; }
+.badge {
+  display:inline-block; font-size:.55rem; letter-spacing:2px;
+  padding:.2rem .6rem; border-radius:4px; margin-bottom:.6rem;
+  font-family:var(--font-display);
+}
+.badge-ready { background:rgba(0,255,136,.15); color:var(--success); border:1px solid var(--success); }
+.badge-ship { background:rgba(255,200,50,.15); color:var(--gold); border:1px solid var(--gold); }
+.badge-soon { background:rgba(153,68,255,.15); color:var(--purple); border:1px solid var(--purple); }
+.badge-legal { background:rgba(0,204,255,.12); color:var(--cyan); border:1px solid var(--cyan); }
+.progress-bar { height:6px; background:var(--panel2); border-radius:3px; margin:.8rem 0; overflow:hidden; }
+.progress-fill { height:100%; background:linear-gradient(90deg, var(--accent), var(--neon)); border-radius:3px; transition:width .6s; }
+.meta-row { display:flex; flex-wrap:wrap; gap:.5rem; margin:.8rem 0; }
+.meta-tag { font-size:.7rem; padding:.2rem .5rem; background:var(--panel2); border-radius:4px; color:var(--muted); }
+.val-table { width:100%; border-collapse:collapse; margin:.8rem 0; font-size:.85rem; }
+.val-table th, .val-table td { padding:.4rem .6rem; text-align:left; border-bottom:1px solid rgba(255,255,255,.06); }
+.val-table th { color:var(--accent); font-family:var(--font-display); font-size:.6rem; letter-spacing:1px; }
+.val-table .hi { color:var(--gold); }
+.val-table .lo { color:var(--cyan); }
+
+/* ═══ Q&A CHAT ═══ */
+.qa-panel {
+  background:var(--panel); border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radius); overflow:hidden; margin:1rem 0;
+}
+.qa-messages {
+  height:320px; overflow-y:auto; padding:1rem;
+  display:flex; flex-direction:column; gap:.8rem;
+}
+.msg { max-width:85%; padding:.7rem 1rem; border-radius:12px; font-size:.92rem; line-height:1.5; }
+.msg-bot { background:var(--panel2); align-self:flex-start; border-left:3px solid var(--accent); }
+.msg-user { background:rgba(255,0,51,.15); align-self:flex-end; border-right:3px solid var(--accent); }
+[data-theme="conservative"] .msg-user { background:rgba(74,158,255,.15); }
+[data-theme="highend"] .msg-user, [data-theme="masterpiece"] .msg-user { background:rgba(255,215,0,.12); }
+.qa-input-row { display:flex; gap:.5rem; padding:.8rem; border-top:1px solid rgba(255,255,255,.08); }
+.qa-input { flex:1; background:var(--panel2); border:1px solid rgba(255,255,255,.1); border-radius:8px; padding:.6rem 1rem; color:var(--text); font-family:var(--font-body); font-size:1rem; }
+.qa-input:focus { outline:none; border-color:var(--accent); }
+.qa-suggestions { display:flex; flex-wrap:wrap; gap:.4rem; padding:0 .8rem .8rem; }
+.qa-chip { font-size:.75rem; padding:.3rem .7rem; background:var(--panel2); border:1px solid rgba(255,255,255,.1); border-radius:999px; cursor:pointer; color:var(--muted); transition:all .2s; }
+.qa-chip:hover { border-color:var(--accent); color:var(--accent); }
+
+/* ═══ VALUATION PANEL ═══ */
+.val-panel { background:var(--panel); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:1.5rem; }
+.val-total { font-family:var(--font-display); font-size:2rem; color:var(--gold); text-align:center; margin:1rem 0; }
+.val-breakdown { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1rem; }
+.val-col { text-align:center; padding:1rem; background:var(--panel2); border-radius:8px; }
+.val-col h4 { font-family:var(--font-display); font-size:.6rem; letter-spacing:2px; color:var(--muted); margin-bottom:.5rem; }
+.val-col .num { font-size:1.4rem; color:var(--accent); font-family:var(--font-display); }
+
+/* ═══ TODOS ═══ */
+.todo-item { display:flex; align-items:flex-start; gap:.6rem; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.05); }
+.todo-item input { margin-top:.3rem; accent-color:var(--accent); }
+.todo-item.done span { text-decoration:line-through; color:var(--muted); opacity:.6; }
+.todo-item .prio { font-size:.55rem; padding:.1rem .4rem; border-radius:3px; }
+.prio-p0 { background:rgba(255,0,51,.2); color:var(--accent); }
+.prio-p1 { background:rgba(255,200,50,.2); color:var(--gold); }
+.prio-p2 { background:rgba(153,68,255,.2); color:var(--purple); }
+
+/* ═══ AUDIENCE MODES ═══ */
+[data-audience="family"] .investor-only { display:none; }
+[data-audience="friend"] .business-only { display:none; }
+[data-audience="business"] .family-only { display:none; }
+
+/* ═══ PITCH BOX ═══ */
+.pitch-box {
+  background:var(--panel2); border:1px dashed var(--accent);
+  border-radius:var(--radius); padding:1.2rem; margin:1rem 0;
+  font-size:.9rem; line-height:1.7; white-space:pre-wrap;
+  max-height:200px; overflow-y:auto;
+}
+
+/* ═══ MASTERPIECE EXTRAS ═══ */
+[data-theme="masterpiece"] .card { border-color:rgba(232,197,71,.2); }
+[data-theme="masterpiece"] .hero h1 { letter-spacing:6px; }
+[data-theme="masterpiece"] body::after {
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(0,0,0,.4));
+  pointer-events:none; z-index:0;
+}
+
+/* ═══ EVOLVE REPORT ═══ */
+.evolve-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:1rem; }
+.evolve-stat { text-align:center; padding:1.2rem; background:var(--panel2); border-radius:8px; }
+.evolve-stat .val { font-family:var(--font-display); font-size:1.6rem; color:var(--accent); }
+.evolve-stat .lbl { font-size:.7rem; color:var(--muted); letter-spacing:1px; margin-top:.3rem; }
+
+footer { text-align:center; padding:2rem; color:var(--muted); font-size:.8rem; border-top:1px solid rgba(255,255,255,.06); margin-top:3rem; }
+footer a { color:var(--accent); }
+
+@media (max-width:700px) {
+  .val-breakdown { grid-template-columns:1fr; }
+  .controls { position:relative; }
+}
+</style>
+</head>
+<body data-theme="normal" data-audience="investor">
+<div class="scanline"></div>
+<div class="wrap">
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <p class="owner">DARKONE · XXDARK187XX · FLIPOUT LEGION</p>
+  <h1 id="hero-title">EMPIRE PORTFOLIO HOMEGUIDE</h1>
+  <p class="tagline" id="hero-tagline">Interactive Q&A · Self-Evolving Report · Investor-Ready Copy</p>
+  <div class="stats-row" id="hero-stats">
+    <div class="stat-pill">ASSETS <span>293,953 files</span></div>
+    <div class="stat-pill">PRODUCTS <span>7 live + 4 pipeline</span></div>
+    <div class="stat-pill">BUILT <span>2025–2026</span></div>
+    <div class="stat-pill">LOCATION <span>C:\Users\xxdae</span></div>
+    <div class="stat-pill">LEGAL <span>Educational Lab Only</span></div>
+  </div>
+</header>
+
+<!-- ═══ CONTROLS ═══ -->
+<div class="controls">
+  <div class="ctrl-group">
+    <span class="ctrl-label">THEME</span>
+    <button class="btn active" data-theme-btn="normal">Normal</button>
+    <button class="btn" data-theme-btn="conservative">Conservative</button>
+    <button class="btn" data-theme-btn="highend">High-End</button>
+    <button class="btn btn-gold" data-theme-btn="masterpiece">✦ Masterpiece</button>
+  </div>
+  <div class="ctrl-group">
+    <span class="ctrl-label">AUDIENCE</span>
+    <button class="btn active" data-audience-btn="investor">Investor</button>
+    <button class="btn" data-audience-btn="business">Business</button>
+    <button class="btn" data-audience-btn="friend">Friend</button>
+    <button class="btn" data-audience-btn="family">Family</button>
+  </div>
+  <div class="ctrl-group">
+    <span class="ctrl-label">VALUATION</span>
+    <button class="btn active" data-val-btn="normal">Normal</button>
+    <button class="btn" data-val-btn="conservative">Conservative</button>
+    <button class="btn" data-val-btn="highend">High-End</button>
+  </div>
+  <button class="btn btn-copy" id="copy-pitch">📋 Copy Pitch</button>
+  <button class="btn btn-primary" id="evolve-btn">🔄 Self-Evolve Report</button>
+</div>
+
+<!-- ═══ PITCH PREVIEW ═══ -->
+<div class="pitch-box" id="pitch-preview"></div>
+
+<!-- ═══ SELF-EVOLVE REPORT ═══ -->
+<h2 class="section-title">SELF-EVOLVE STATUS REPORT</h2>
+<div class="evolve-grid" id="evolve-stats">
+  <div class="evolve-stat"><div class="val" id="ev-files">293,953</div><div class="lbl">FILES INVENTORIED</div></div>
+  <div class="evolve-stat"><div class="val" id="ev-products">7</div><div class="lbl">SHIP-READY PRODUCTS</div></div>
+  <div class="evolve-stat"><div class="val" id="ev-complete">78%</div><div class="lbl">AVG COMPLETION</div></div>
+  <div class="evolve-stat"><div class="val" id="ev-legal">100%</div><div class="lbl">DISCLAIMER COVERAGE</div></div>
+  <div class="evolve-stat"><div class="val" id="ev-rev">$0</div><div class="lbl">REVENUE LOGGED</div></div>
+  <div class="evolve-stat"><div class="val" id="ev-updated">—</div><div class="lbl">LAST EVOLVED</div></div>
+</div>
+
+<!-- ═══ VALUATION ═══ -->
+<h2 class="section-title">PORTFOLIO VALUATION BREAKDOWN</h2>
+<div class="val-panel">
+  <div class="val-total" id="val-total">$127,400</div>
+  <p style="text-align:center;color:var(--muted);font-size:.85rem" id="val-subtitle">Normal estimate · IP + productized assets + pipeline value</p>
+  <div class="val-breakdown">
+    <div class="val-col"><h4>CONSERVATIVE</h4><div class="num" id="val-lo">$48,200</div><p style="font-size:.75rem;color:var(--muted);margin-top:.4rem">As-is, no sales proof</p></div>
+    <div class="val-col"><h4>NORMAL</h4><div class="num" id="val-mid">$127,400</div><p style="font-size:.75rem;color:var(--muted);margin-top:.4rem">Built + launch-ready</p></div>
+    <div class="val-col"><h4>HIGH-END</h4><div class="num" id="val-hi">$890,000</div><p style="font-size:.75rem;color:var(--muted);margin-top:.4rem">60-day roadmap executed</p></div>
+  </div>
+</div>
+
+<!-- ═══ INTERACTIVE Q&A ═══ -->
+<h2 class="section-title">INTERACTIVE AI Q&A — ASK ANYTHING</h2>
+<div class="qa-panel">
+  <div class="qa-messages" id="qa-messages">
+    <div class="msg msg-bot">Welcome to the DarkOne Empire Home Guide. I know your full portfolio — products, legal status, valuations, todos, and how to pitch to any audience. Ask me anything, or tap a quick question below.</div>
+  </div>
+  <div class="qa-suggestions" id="qa-chips"></div>
+  <div class="qa-input-row">
+    <input class="qa-input" id="qa-input" placeholder="Ask: What is Dark Flipout? How legal is this? What's left to ship?" autocomplete="off">
+    <button class="btn btn-primary" id="qa-send">ASK</button>
+  </div>
+</div>
+
+<!-- ═══ PRODUCTS ═══ -->
+<h2 class="section-title">PRODUCT LINE — FULL BREAKDOWN</h2>
+<div class="grid" id="product-grid"></div>
+
+<!-- ═══ PERSONAS ═══ -->
+<h2 class="section-title">WHO IT'S FOR — PERSONA GUIDE</h2>
+<div class="grid" id="persona-grid"></div>
+
+<!-- ═══ TODOS ═══ -->
+<h2 class="section-title">EXECUTION TODOS — WHAT'S LEFT</h2>
+<div class="card" id="todo-panel"></div>
+
+<!-- ═══ LEGAL ═══ -->
+<h2 class="section-title">LEGAL & MARKETABILITY</h2>
+<div class="grid">
+  <div class="card">
+    <span class="badge badge-legal">LEGAL FRAMEWORK</span>
+    <h3>Educational / Authorized Lab Only</h3>
+    <ul>
+      <li>Full DISCLAIMER.md on every product tier</li>
+      <li>No pre-flashed attack devices sold — buyers flash their own hardware</li>
+      <li>SALE edition sanitized; GODTIER personal build never sold</li>
+      <li>LAB_AUTHORIZED gates on ReconRaptor + Evil Portal chains</li>
+      <li>Masterclass attestation checkbox required</li>
+      <li>Complies with FCC Part 15, CFAA educational use framing</li>
+    </ul>
+    <a class="btn btn-outline" href="file:///C:/Users/xxdae/dark_flipout_v2_bundle/DISCLAIMER.md" style="margin-top:.8rem">Read Disclaimer</a>
+  </div>
+  <div class="card investor-only">
+    <span class="badge badge-ready">MARKET FIT</span>
+    <h3>Why This Sells</h3>
+    <ul>
+      <li>$14B+ cybersecurity training market growing 12% YoY</li>
+      <li>Maker/pentest crossover — Flipper Zero ecosystem = 2M+ devices</li>
+      <li>Digital product margins: 85–95% on Gumroad</li>
+      <li>Content engine: 10 viral Shorts scripts ready to film</li>
+      <li>Affiliate army: 30% rev share assets built</li>
+      <li>Upsell ladder: $49 → $199 → $999 → $2,499 white-label</li>
+    </ul>
+  </div>
+  <div class="card family-only" style="display:none">
+    <span class="badge badge-legal">FOR FAMILY</span>
+    <h3>What Dad/Bro Built</h3>
+    <p>Think of it like selling online courses + toolkits for people who want to learn cybersecurity the legal way — like a digital textbook with 3D print files, lab guides, and AI helpers. Everything is educational. Nothing gets sold that could hack someone else's stuff.</p>
+  </div>
+</div>
+
+<footer>
+  DarkOne Empire © 2026 · Built on Windows 10 · C:\Users\xxdae<br>
+  <a href="file:///C:/Users/xxdae/EMPIRE_LAUNCHPAD/index.html">Empire Launchpad</a> ·
+  <a href="file:///C:/Users/xxdae/dark_flipout_v2_bundle/DISCLAIMER.md">Legal Disclaimer</a> ·
+  Educational & Authorized Security Research Only
+</footer>
+</div>
+
+<script>
+// ═══ DATA ENGINE ═══
+const PRODUCTS = [
+  {
+    id:'dark-flipout',
+    name:'Dark Flipout v2.0',
+    badge:'badge-ship', badgeText:'PRODUCT #1 — SHIP NOW',
+    status:85, built:'Jun 2025 – Jul 2026', where:'dark_flipout_v2_bundle/',
+    what:'Educational RF & firmware lab product line. 5 DIY projects, flash workflows, 3D STLs, AI Legion prompts, Gumroad sales assets.',
+    how:'Markdown docs, Python/PowerShell scripts, STL 3D models, Bambu profiles, Notion templates, email sequences, viral video scripts. Built with Grok AI Legion (Overlord/Forge/Venom/Reaper).',
+    legal:'Full disclaimer. No attack devices. Lab-only scripts sanitized from harvest vault.',
+    tiers:[
+      {name:'Starter', price:49, target:'Hobbyist maker', includes:'5 projects, flash sheets, 25 prompts, Bambu profile'},
+      {name:'Operator Kit', price:199, target:'Junior pentester, creator', includes:'12 STLs, 100 prompts, pentest lab, Quest HUD, Telegram'},
+      {name:'Masterclass', price:999, target:'Agency, trainer', includes:'12-week cohort, white-label, lifetime community, 1:1 call'}
+    ],
+    val:{conservative:15000, normal:45000, highend:250000},
+    left:['Upload Gumroad listings','Register darkflipout.com','Import email to ConvertKit','Post Short #1'],
+    persona:'Maker curious about RF/security who owns a Flipper or ESP32'
+  },
+  {
+    id:'darkflipout-dash',
+    name:'D@RKFLIP0UT Command Center',
+    badge:'badge-ready', badgeText:'BUILT — PERSONAL + SALE',
+    status:92, built:'2025–2026', where:'D@RKFLIP0UT/',
+    what:'One-click deploy dashboard for Flipper Zero. GODTIER personal build + sanitized SALE edition for Gumroad buyers.',
+    how:'HTML/CSS/JS dashboard, Python deploy scripts, PowerShell flash automation, Momentum firmware integration, qFlipper sync, animated HTML guide + PDF.',
+    legal:'GODTIER never sold. SALE edition strips attack chains. Lab-only Evil Portal with LAB_AUTHORIZED gate.',
+    tiers:[
+      {name:'GODTIER Personal', price:0, target:'You (DarkOne)', includes:'Ghost suite, attack chains, full pentest arsenal'},
+      {name:'SALE Edition', price:199, target:'Gumroad buyers', includes:'Sanitized template, lab samples, app catalog, buyer guide'}
+    ],
+    val:{conservative:8000, normal:22000, highend:80000},
+    left:['Final QA on SALE zip','Screenshot for Gumroad listing'],
+    persona:'Flipper owner who wants guided deploy without reading 50 GitHub repos'
+  },
+  {
+    id:'empire-launchpad',
+    name:'Empire Launchpad',
+    badge:'badge-ready', badgeText:'COMMAND CENTER',
+    status:95, built:'Jun 2026', where:'EMPIRE_LAUNCHPAD/',
+    what:'Desktop command center linking all products, revenue tracker, walkthrough, icon picker, BUILD_ALL zip automation.',
+    how:'HTML/CSS (Orbitron + Rajdhani), Python icon generator, PowerShell desktop shortcuts, BAT build scripts.',
+    legal:'Internal ops tool. Links to disclaimer on all outbound products.',
+    tiers:[
+      {name:'Internal', price:0, target:'DarkOne operator', includes:'Full empire navigation, 60-day tracker, today path'}
+    ],
+    val:{conservative:3000, normal:8000, highend:25000},
+    left:['Update revenue tracker with actual sales'],
+    persona:'You — daily operator desk for launch execution'
+  },
+  {
+    id:'reconraptor',
+    name:'ReconRaptor LAB v2',
+    badge:'badge-ship', badgeText:'PRODUCT #2 — DAY 15+',
+    status:72, built:'2025–2026', where:'ReconRaptor_LAB/',
+    what:'Educational security lab launcher. Dashboard, Signal World overlay, 526 vaulted scripts. Complete beast stays GODTIER internal.',
+    how:'Python core, Bash launchers, HTML dashboards, Signal overlay JS, harvest vault integration. Stripped live-target defaults.',
+    legal:'LAB_AUTHORIZED gates. Complete edition with scanme.nmap.org defaults NEVER sold.',
+    tiers:[
+      {name:'LAB Starter', price:47, target:'Linux learner', includes:'Launcher, dashboard, scope gates'},
+      {name:'LAB Pro + Signal', price:97, target:'Content creator', includes:'Signal World overlay, RF viz, grind/gaming mode'},
+      {name:'Signal Sub', price:19, target:'Premium members', includes:'Monthly Signal World access via LustForge'}
+    ],
+    val:{conservative:12000, normal:35000, highend:120000},
+    left:['Run BUILD_RR_LAB.bat','Upload Gumroad listing','Cross-sell to Flipout email list'],
+    persona:'Kali/Parrot user or Android pentest learner wanting a unified lab launcher'
+  },
+  {
+    id:'lustforge',
+    name:'LustForge Lab Command',
+    badge:'badge-soon', badgeText:'PHASE 2 — $47–$197',
+    status:55, built:'2025–2026', where:'Desktop/lustforger/',
+    what:'FastAPI local-lab dashboard for ethical pentest learning tasks. Premium Black Diamond UI sample ready.',
+    how:'Python FastAPI, task queue, agent runner, premium HTML UI sample, safety boundary enforcement.',
+    legal:'Refuses fraud, credential theft, unauthorized access automation. Lab-only task approval flow.',
+    tiers:[
+      {name:'Lab Basic', price:47, target:'Self-learner', includes:'Dashboard, task management, health checks'},
+      {name:'Lab Pro', price:97, target:'Power user', includes:'Agent automation, premium UI, Signal World sub'},
+      {name:'Premium Sub', price:19, target:'Monthly member', includes:'OnlyMyFans/LustForge premium lane'}
+    ],
+    val:{conservative:5000, normal:18000, highend:75000},
+    left:['Package $47 tier zip','Deploy to Desktop shortcut','Connect Signal World sub'],
+    persona:'Someone building a structured ethical hacking study plan with task tracking'
+  },
+  {
+    id:'harvest-vault',
+    name:'Dark Tools Harvest Vault',
+    badge:'badge-ready', badgeText:'293K FILE ARSENAL',
+    status:100, built:'Jun 2026', where:'dark_tools_harvest/',
+    what:'Full machine inventory: 293,953 files scanned, 82,120 copied. Python scripts, wordlists, docs, archives — monetizable as Empire 10-pack.',
+    how:'Automated harvest scanner, categorized inventory JSON, pre-zipped Gumroad products in Archives folder.',
+    legal:'Must sanitize before ship — lab scripts only, no live-target payloads or cracks.',
+    tiers:[
+      {name:'Empire 10-Pack', price:'15–97', target:'Quick cash buyers', includes:'Pre-zipped niche tool packs'},
+      {name:'Reference Library', price:0, target:'Internal', includes:'Full categorized vault for product extraction'}
+    ],
+    val:{conservative:8000, normal:20000, highend:50000},
+    left:['Sanitize harvest pulls','Upload Empire 10-pack to Gumroad'],
+    persona:'Power users wanting curated script collections without building from scratch'
+  },
+  {
+    id:'legion-skill',
+    name:'Flipout Legion AI Skill',
+    badge:'badge-ready', badgeText:'GROK SKILL INSTALLED',
+    status:90, built:'Jun 2026', where:'.grok/skills/dark-flipout-forge/',
+    what:'Grok operator skill with 4 personas: Overlord (strategy), Forge (build), Venom (copy), Reaper (QA). 100+ prompts.',
+    how:'SKILL.md + legion_prompts_pack.md. Daily content automation at 06:00. Integrates with Grok CLI.',
+    legal:'Educational-only prompts. Reaper QA checks disclaimer coverage.',
+    tiers:[
+      {name:'Lite (Starter)', price:49, target:'Starter buyers', includes:'25 prompts'},
+      {name:'Full Pack', price:199, target:'Operator buyers', includes:'100 prompts, 3 personas'},
+      {name:'Pro Scaffolds', price:149, target:'Power users', includes:'500 prompts + custom skill scaffolds'}
+    ],
+    val:{conservative:2000, normal:6000, highend:20000},
+    left:['Ship prompts pack in Operator zip'],
+    persona:'AI power user who wants pre-built operator personas for content + build automation'
+  },
+  {
+    id:'hardware-lab',
+    name:'Physical Hardware Lab',
+    badge:'badge-ready', badgeText:'INFRASTRUCTURE',
+    status:80, built:'2024–2026', where:'Desk + 990 PRO + Flipper + ESP32',
+    what:'Flipper Zero (Momentum firmware), ESP32 dev boards, Quest 3 HUD companion, Bambu Lab 3D printer, Samsung 990 PRO with Kali/Parrot partitions.',
+    how:'Firmware flash workflows, 12 custom STLs (PETG), WiFi dev board Evil Portal lab, Quest Unity skeleton.',
+    legal:'All testing on owned devices in shielded RF lab environment.',
+    tiers:[
+      {name:'Lab Setup Guide', price:0, target:'Content/demo', includes:'Hardware guide in Downloads'},
+      {name:'3D Arsenal', price:79, target:'Maker buyers', includes:'12 STLs + Bambu X1C profiles'}
+    ],
+    val:{conservative:3000, normal:8000, highend:15000},
+    left:['Replace STL placeholders with final CAD','Film hardware demo Short'],
+    persona:'Hardware hacker with Flipper + 3D printer wanting integrated lab setup'
+  }
+];
+
+const TODOS = [
+  {id:1, text:'Upload Dark Flipout Starter ($49) + Operator Kit ($199) to Gumroad with zips + DISCLAIMER.pdf', prio:'p0', done:false},
+  {id:2, text:'Register darkflipout.com + deploy Carrd landing from sales/landing_page.md', prio:'p0', done:false},
+  {id:3, text:'Import 7-day email sequence to ConvertKit + gate free PDF lead magnet', prio:'p0', done:false},
+  {id:4, text:'Post viral Short script #1 + pin X launch post #1', prio:'p0', done:false},
+  {id:5, text:'Activate FLIPOUT10 coupon (10% off, 48h urgency)', prio:'p1', done:false},
+  {id:6, text:'DM 20 micro-creators with 30% affiliate offer', prio:'p1', done:false},
+  {id:7, text:'Run BUILD_RR_LAB.bat + upload ReconRaptor LAB to Gumroad', prio:'p1', done:false},
+  {id:8, text:'Sanitize harvest vault + upload Empire 10-pack', prio:'p1', done:false},
+  {id:9, text:'Package LustForge $47 tier after first $10k Flipout cashflow', prio:'p2', done:false},
+  {id:10, text:'Open Legion Masterclass applications (8 seats @ $999)', prio:'p2', done:false},
+  {id:11, text:'Reconcile product inconsistency: NFC audit vs Marauder survey in catalog', prio:'p1', done:false},
+  {id:12, text:'Paste disclaimer headers into all lab scripts (daily_lab_health, network map)', prio:'p1', done:false}
+];
+
+const QA_KB = [
+  {keys:['what is dark flipout','dark flipout','product 1','flipout'],
+   answer:'Dark Flipout v2.0 is Product #1 — an educational RF & firmware lab product line. Three tiers: Starter ($49), Operator Kit ($199), Masterclass ($999). Includes 5 legal DIY projects, flash workflows for RogueMaster/Marauder/Momentum, 12 3D STLs, 100+ AI Legion prompts, and full Gumroad sales assets. Built Jun 2025–Jul 2026 at C:\\Users\\xxdae\\dark_flipout_v2_bundle\\. 85% complete — needs Gumroad upload and domain.'},
+  {keys:['legal','disclaimer','law','illegal','authorized'],
+   answer:'Everything is framed as Educational & Authorized Security Research Only. Full DISCLAIMER.md on every tier. No pre-flashed attack devices sold. GODTIER personal build never ships to buyers — SALE edition is sanitized. LAB_AUTHORIZED gates on ReconRaptor and Evil Portal chains. Masterclass requires attestation checkbox. Reaper QA flagged: disclaimer not yet in every script header — that\'s a pending todo.'},
+  {keys:['valuation','worth','value','how much','money'],
+   answer:'Portfolio valuation (Normal): ~$127,400 across 8 product lines. Conservative (as-is, no sales): ~$48,200. High-End (60-day roadmap executed): ~$890,000. Month 1 revenue target if launched: ~$16,182 net from Flipout alone. 60-day stretch goal: $1M cumulative (requires viral Shorts + Masterclass seats + affiliate scale). Toggle the valuation buttons above for live numbers.'},
+  {keys:['what\'s left','todo','remaining','ship','next'],
+   answer:'Top P0 blockers: (1) Upload Gumroad listings with zips + DISCLAIMER.pdf, (2) Register darkflipout.com + Carrd landing, (3) Import 7-day email to ConvertKit, (4) Post first viral Short. P1: affiliate DMs, ReconRaptor LAB zip, Empire 10-pack upload, disclaimer script headers. Check the Todos section — checkboxes save to your browser.'},
+  {keys:['reconraptor','recon raptor','signal world','product 2'],
+   answer:'ReconRaptor LAB v2 is Product #2 ($47/$97). Educational security lab launcher with dashboard + Signal World overlay. 526 scripts vaulted. The "Complete" beast edition with live-target defaults stays GODTIER internal — never sold. 72% complete. Cross-sell to Flipout email list for $8k–$25k Month 1 potential.'},
+  {keys:['lustforge','onlymyfans','product 3','saas'],
+   answer:'LustForge Lab Command is Phase 2 ($47–$197 FastAPI dashboard). 55% complete at Desktop/lustforger/. Premium Black Diamond UI sample ready. OnlyMyFans = subscription rebrand lane for LustForge premium ($19/mo). Ship after first $10k Flipout cashflow proves the funnel.'},
+  {keys:['how built','tech','stack','built','tools'],
+   answer:'Built with: Python, PowerShell, Bash, HTML/CSS/JS, FastAPI, Arduino/ESP32 (C++), STL 3D models (Bambu Lab PETG), Markdown docs, Grok AI Legion (4 personas), Notion templates, Gumroad copy. Hardware: Flipper Zero + Momentum firmware, ESP32 dev boards, Quest 3, Bambu 3D printer, Samsung 990 PRO (Kali/Parrot partitions). Location: C:\\Users\\xxdae on Windows 10.'},
+  {keys:['investor','pitch','invest'],
+   answer:'Pitch: "DarkOne built a 7-product educational cybersecurity empire from 293K inventoried assets. Product #1 (Dark Flipout) is 85% launch-ready on Gumroad at $49/$199/$999 tiers. 85–95% digital margins. $14B+ training market. Legal framework complete. First dollar path: free PDF → email funnel → FLIPOUT10 coupon → affiliate army. Normal IP value: $127K. High-end execution value: $890K. Needs: domain + Gumroad upload (2-hour task)." Hit Copy Pitch button for full text.'},
+  {keys:['family','mom','dad','explain simple'],
+   answer:'Simple version: I built a collection of online courses and toolkits that teach people how to learn cybersecurity safely and legally — like digital textbooks with 3D print files, step-by-step guides, and AI helpers. It\'s sold online (like Etsy but for digital downloads). The main product costs $49–$999. Everything is educational — nothing that could hack other people\'s stuff gets sold.'},
+  {keys:['friend','cool','what do you do'],
+   answer:'Bro I built an entire cyberpunk lab empire. Dark Flipout = educational Flipper Zero + ESP32 + 3D print product line. Got a command center dashboard, AI personas that write my content, 293K files of tools organized, ReconRaptor lab launcher, and a 60-day roadmap to $1M. Blood-red neon aesthetic. Just needs to go live on Gumroad — the hard build work is done.'},
+  {keys:['business','b2b','agency','white label'],
+   answer:'B2B play: Legion Masterclass ($999/seat, 12-week cohort) + White-label pack ($2,499 — full brand swap, 10-seat license). Target: security training agencies, MSPs adding pentest education, content creators wanting turnkey lab curriculum. ReconRaptor LAB for Linux training providers. LustForge as SaaS dashboard for structured lab programs. Affiliate: 30% rev share.'},
+  {keys:['theme','masterpiece','normal','conservative'],
+   answer:'Four presentation themes: Normal (blood-red cyberpunk — default), Conservative (professional blue — for corporate), High-End (gold luxury — for premium pitch), Masterpiece (platinum editorial — maximum visual impact). Toggle at top. Valuation mode separately adjusts numbers between Conservative/Normal/High-End estimates.'},
+  {keys:['harvest','vault','293','files','empire 10'],
+   answer:'dark_tools_harvest/ contains 293,953 scanned files (82,120 copied). Categories: 51K Python scripts, 79K wordlists, 16K markdown docs, 4.6K archives. Monetized as Gumroad Empire 10-pack ($15–$97 quick cash products). Must sanitize — lab scripts only, no live-target payloads. Pre-zipped products ready in Archives folder.'},
+  {keys:['grok','legion','ai','skill','prompt'],
+   answer:'Flipout Legion = Grok skill with 4 AI personas: Overlord (strategy/pricing), Forge (build/firmware/3D), Venom (copy/social/email), Reaper (QA/disclaimers). 100+ prompts in Operator Kit. Installed at .grok/skills/dark-flipout-forge/. Daily 06:00 automation generates TikTok script + X post + Telegram update from build logs.'},
+  {keys:['hardware','flipper','esp32','3d','bambu'],
+   answer:'Physical lab: Flipper Zero (Momentum firmware, transparent case mod), ESP32 dev boards (WiFi mapper, Marauder companion, MQTT dashboard), 12 custom STLs for Bambu Lab PETG printing, Quest 3 HUD companion (Unity skeleton), Samsung 990 PRO with Kali/Parrot Linux partitions. All owned-device testing in shielded RF environment.'},
+  {keys:['revenue','month 1','sales','gumroad','income'],
+   answer:'Conservative Month 1 (Flipout only): Starter 120×$49=$5,880 + Kit 40×$199=$7,960 + Masterclass 8×$999=$7,992 + Subs 50×$19=$950 = ~$22,782 gross, ~$16,182 net after 30% affiliate cost. Add ReconRaptor LAB: +$8k–$25k. 60-day cumulative target: $1M (stretch, needs viral + scale). Gumroad = fastest day-1 cash channel.'}
+];
+
+const PERSONAS = [
+  {icon:'💰', title:'Investor', desc:'Wants ROI, market size, margins, risk mitigation, execution timeline.', use:'Show valuation panel (Normal), legal framework card, 60-day roadmap, Month 1 revenue math. Copy Pitch button.'},
+  {icon:'🏢', title:'Business Partner', desc:'Wants white-label, B2B tiers, agency play, affiliate structure.', use:'Highlight Masterclass ($999), White-label ($2,499), LustForge SaaS, 30% affiliate kit, ReconRaptor for training providers.'},
+  {icon:'🤝', title:'Friend', desc:'Wants to know what you actually built and why it\'s cool.', use:'Show D@RKFLIP0UT Command Center, Signal World overlay, 293K harvest vault, blood-red cyberpunk theme. Keep it hype.'},
+  {icon:'👨‍👩‍👧', title:'Family', desc:'Wants simple explanation of what you do and that it\'s legal.', use:'Switch to Family audience mode. "Online courses + toolkits for learning cybersecurity safely." No jargon.'},
+  {icon:'🔧', title:'Maker / Hobbyist', desc:'Owns Flipper or ESP32, wants step-by-step lab projects.', use:'Dark Flipout Starter $49 — 5 projects, flash sheets, Bambu STLs. Free PDF lead magnet.'},
+  {icon:'🎓', title:'Junior Pentester', desc:'Wants structured lab with reporting templates.', use:'Operator Kit $199 — pentest lab arsenal, scope templates, executive summary, finding templates.'},
+  {icon:'📹', title:'Content Creator', desc:'Wants viral hooks, Shorts scripts, affiliate income.', use:'10 viral video scripts, 30% affiliate kit, Signal World grind/gaming mode for POV content.'},
+  {icon:'🏛️', title:'Agency / Trainer', desc:'Wants turnkey curriculum to resell.', use:'Masterclass $999 + White-label $2,499. Rebrand Gumroad + Notion + email sequences. 10-seat license.'}
+];
+
+const CHIPS = [
+  'What is Dark Flipout?','How legal is this?','Portfolio valuation?','What\'s left to ship?',
+  'Explain to my family','Investor pitch','ReconRaptor status','How was this built?',
+  'Month 1 revenue?','Show me LustForge'
+];
+
+// ═══ VALUATION ENGINE ═══
+function calcValuation(mode) {
+  let total = 0;
+  PRODUCTS.forEach(p => { total += p.val[mode] || p.val.normal; });
+  return total;
+}
+
+function formatMoney(n) {
+  return '$' + n.toLocaleString();
+}
+
+function updateValuation(mode) {
+  const lo = calcValuation('conservative');
+  const mid = calcValuation('normal');
+  const hi = calcValuation('highend');
+  const display = mode === 'conservative' ? lo : mode === 'highend' ? hi : mid;
+  document.getElementById('val-total').textContent = formatMoney(display);
+  document.getElementById('val-lo').textContent = formatMoney(lo);
+  document.getElementById('val-mid').textContent = formatMoney(mid);
+  document.getElementById('val-hi').textContent = formatMoney(hi);
+  const subs = {conservative:'Conservative · as-is IP, no sales proof', normal:'Normal · built + launch-ready assets', highend:'High-End · 60-day roadmap fully executed'};
+  document.getElementById('val-subtitle').textContent = subs[mode] + ' · IP + productized assets + pipeline';
+}
+
+// ═══ RENDER PRODUCTS ═══
+function renderProducts() {
+  const grid = document.getElementById('product-grid');
+  const valMode = document.querySelector('[data-val-btn].active')?.dataset.valBtn || 'normal';
+  grid.innerHTML = PRODUCTS.map(p => {
+    const v = p.val[valMode];
+    const tiersHtml = p.tiers.map(t => `<tr><td>${t.name}</td><td>$${t.price}</td><td>${t.target}</td></tr>`).join('');
+    const leftHtml = p.left.map(l => `<li>${l}</li>`).join('');
+    return `<div class="card" data-product="${p.id}">
+      <span class="badge ${p.badge}">${p.badgeText}</span>
+      <h3>${p.name}</h3>
+      <div class="progress-bar"><div class="progress-fill" style="width:${p.status}%"></div></div>
+      <p style="font-size:.8rem;color:var(--muted)">${p.status}% complete · Built ${p.built} · <code style="color:var(--cyan)">${p.where}</code></p>
+      <p style="margin:.6rem 0"><strong style="color:var(--text)">What:</strong> ${p.what}</p>
+      <p><strong style="color:var(--text)">How:</strong> ${p.how}</p>
+      <p><strong style="color:var(--text)">Legal:</strong> ${p.legal}</p>
+      <table class="val-table"><thead><tr><th>TIER</th><th>PRICE</th><th>BUYER</th></tr></thead><tbody>${tiersHtml}</tbody></table>
+      <p style="margin-top:.6rem"><strong style="color:var(--gold)">Value (${valMode}):</strong> ${formatMoney(v)}</p>
+      <p><strong style="color:var(--text)">Who:</strong> ${p.persona}</p>
+      <p style="margin-top:.5rem"><strong style="color:var(--accent)">Left:</strong></p><ul>${leftHtml}</ul>
+    </div>`;
+  }).join('');
+}
+
+// ═══ RENDER PERSONAS ═══
+function renderPersonas() {
+  document.getElementById('persona-grid').innerHTML = PERSONAS.map(p =>
+    `<div class="card"><h3>${p.icon} ${p.title}</h3><p>${p.desc}</p><p style="margin-top:.5rem;color:var(--cyan)"><strong>How to use:</strong> ${p.use}</p></div>`
+  ).join('');
+}
+
+// ═══ TODOS ═══
+function renderTodos() {
+  const saved = JSON.parse(localStorage.getItem('empire-todos') || '[]');
+  const panel = document.getElementById('todo-panel');
+  panel.innerHTML = '<h3>Launch Checklist — ' + TODOS.filter(t => !saved.includes(t.id) && !t.done).length + ' remaining</h3>' +
+    TODOS.map(t => {
+      const checked = saved.includes(t.id) || t.done;
+      return `<label class="todo-item ${checked?'done':''}"><input type="checkbox" data-todo="${t.id}" ${checked?'checked':''}><span>${t.text}</span><span class="prio ${t.prio}">${t.prio.toUpperCase()}</span></label>`;
+    }).join('');
+  panel.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      let s = JSON.parse(localStorage.getItem('empire-todos') || '[]');
+      const id = +cb.dataset.todo;
+      if (cb.checked) { if (!s.includes(id)) s.push(id); }
+      else { s = s.filter(x => x !== id); }
+      localStorage.setItem('empire-todos', JSON.stringify(s));
+      renderTodos();
+    });
+  });
+}
+
+// ═══ Q&A ENGINE ═══
+function findAnswer(q) {
+  const lower = q.toLowerCase();
+  let best = null, bestScore = 0;
+  QA_KB.forEach(entry => {
+    let score = 0;
+    entry.keys.forEach(k => { if (lower.includes(k)) score += k.length; });
+    if (score > bestScore) { bestScore = score; best = entry; }
+  });
+  if (best && bestScore > 0) return best.answer;
+  return 'I don\'t have a specific answer for that yet — but here\'s what I can tell you: your empire has 7 ship-ready products, 78% avg completion, and the #1 blocker is Gumroad upload + domain registration. Try asking about: Dark Flipout, valuation, legal status, todos, ReconRaptor, LustForge, or "explain to my family".';
+}
+
+function addMsg(text, type) {
+  const box = document.getElementById('qa-messages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-' + type;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function askQuestion(q) {
+  if (!q.trim()) return;
+  addMsg(q, 'user');
+  setTimeout(() => addMsg(findAnswer(q), 'bot'), 400);
+  document.getElementById('qa-input').value = '';
+}
+
+// ═══ PITCH GENERATOR ═══
+function generatePitch() {
+  const theme = document.body.dataset.theme;
+  const audience = document.body.dataset.audience;
+  const valMode = document.querySelector('[data-val-btn].active')?.dataset.valBtn || 'normal';
+  const val = formatMoney(calcValuation(valMode));
+  const remaining = TODOS.filter(t => !JSON.parse(localStorage.getItem('empire-todos')||'[]').includes(t.id)).length;
+
+  const pitches = {
+    investor: `DARKONE EMPIRE — INVESTOR BRIEF\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nFounder: DarkOne (XXDark187XX)\nSector: Educational Cybersecurity / Maker Lab Products\nStage: Pre-revenue, launch-ready (85% Product #1)\n\nTHE OPPORTUNITY\nBuilt a 7-product digital empire from 293,953 inventoried assets. Product #1 (Dark Flipout) targets the $14B+ cybersecurity training market at the maker/pentest crossover — 2M+ Flipper Zero devices in the wild, hungry for structured lab content.\n\nPRODUCT LADDER\n• Starter $49 → Operator $199 → Masterclass $999 → White-label $2,499\n• Product #2: ReconRaptor LAB ($47/$97)\n• Product #3: LustForge SaaS ($47–$197 + $19/mo)\n• Empire 10-pack: $15–$97 quick-cash harvest products\n\nUNIT ECONOMICS\n• Digital margins: 85–95%\n• Month 1 target: $16,182 net (Flipout only)\n• 60-day stretch: $1M cumulative\n• Affiliate army: 30% rev share (assets built)\n\nIP VALUATION (${valMode.toUpperCase()}): ${val}\nCompletion: 78% avg across 8 product lines\nRemaining launch tasks: ${remaining}\n\nLEGAL: Educational & authorized lab only. Full disclaimer framework. No attack devices sold. GODTIER personal builds never ship.\n\nASK: Domain registration + Gumroad upload (2-hour task) unlocks first revenue within 48 hours via free PDF → email funnel → FLIPOUT10 coupon.\n\nBuilt: 2025–2026 | Location: C:\\Users\\xxdae | Platform: Gumroad + Carrd + ConvertKit`,
+
+    business: `DARKONE EMPIRE — B2B PARTNERSHIP OVERVIEW\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nWhite-label opportunity: Rebrand our full Gumroad + Notion + email curriculum as your own training product.\n\n• White-label Pack: $2,499 (10-seat license, full brand swap)\n• Masterclass Cohort: $999/seat (12-week live labs)\n• ReconRaptor LAB: $47/$97 per seat for Linux training providers\n• LustForge Dashboard: $47–$197 SaaS for structured lab programs\n• Affiliate: 30% rev share with creative assets included\n\nTarget partners: Security training agencies, MSPs, bootcamps, content creators.\nAll content: Educational & authorized lab use only.`,
+
+    friend: `YO — CHECK OUT WHAT I BUILT 🔥\n\nDark Flipout = my cyberpunk lab empire. Educational Flipper Zero + ESP32 + 3D print product line with blood-red neon aesthetic.\n\n• Command center dashboard (one-click deploy)\n• AI Legion with 4 personas writing my content\n• 293K files organized into sellable products\n• ReconRaptor lab launcher with Signal World overlay\n• 60-day roadmap to $1M\n\nJust needs to go live on Gumroad. The build is DONE.`,
+
+    family: `Hey — here's what I've been working on in simple terms:\n\nI created a collection of online courses and digital toolkits that teach people how to learn cybersecurity safely and legally. Think of it like selling digital textbooks with step-by-step guides, 3D print files, and AI helpers.\n\nThe main products cost between $49 and $999. Everything is educational — I don't sell anything that could be used to hack other people's devices or networks.\n\nI've built 7 different products, organized nearly 300,000 files, and have everything ready to start selling online. I just need to set up the website and upload to the store — should take a couple hours.\n\nIt's like having a digital shop ready to open.`
+  };
+
+  return pitches[audience] || pitches.investor;
+}
+
+function updatePitch() {
+  document.getElementById('pitch-preview').textContent = generatePitch();
+}
+
+// ═══ SELF-EVOLVE ═══
+function evolveReport() {
+  const now = new Date().toLocaleString();
+  document.getElementById('ev-updated').textContent = now.split(',')[0];
+  const done = JSON.parse(localStorage.getItem('empire-todos') || '[]').length;
+  const pct = Math.round(78 + (done / TODOS.length) * 12);
+  document.getElementById('ev-complete').textContent = Math.min(pct, 95) + '%';
+  const rev = localStorage.getItem('empire-revenue') || '0';
+  document.getElementById('ev-rev').textContent = '$' + Number(rev).toLocaleString();
+  const legalPct = Math.round(85 + (done > 5 ? 15 : done * 2));
+  document.getElementById('ev-legal').textContent = Math.min(legalPct, 100) + '%';
+  updatePitch();
+  addMsg('Self-evolve complete. Report refreshed at ' + now + '. Completion now ' + Math.min(pct,95) + '%. Log revenue with: localStorage.setItem("empire-revenue","5000") in browser console.', 'bot');
+}
+
+// ═══ EVENT WIRING ═══
+document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-theme-btn]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.dataset.theme = btn.dataset.themeBtn;
+    const titles = {normal:'EMPIRE PORTFOLIO HOMEGUIDE', conservative:'DARKONE EMPIRE — PROFESSIONAL BRIEF', highend:'DARKONE EMPIRE — PREMIUM PORTFOLIO', masterpiece:'✦ MASTERPIECE — THE DARKONE LEGACY ✦'};
+    document.getElementById('hero-title').textContent = titles[btn.dataset.themeBtn];
+    updatePitch();
+  });
+});
+
+document.querySelectorAll('[data-audience-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-audience-btn]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.body.dataset.audience = btn.dataset.audienceBtn;
+    document.querySelectorAll('.family-only').forEach(el => el.style.display = btn.dataset.audienceBtn === 'family' ? 'block' : 'none');
+    updatePitch();
+  });
+});
+
+document.querySelectorAll('[data-val-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-val-btn]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    updateValuation(btn.dataset.valBtn);
+    renderProducts();
+  });
+});
+
+document.getElementById('qa-send').addEventListener('click', () => askQuestion(document.getElementById('qa-input').value));
+document.getElementById('qa-input').addEventListener('keydown', e => { if (e.key === 'Enter') askQuestion(e.target.value); });
+document.getElementById('copy-pitch').addEventListener('click', () => {
+  navigator.clipboard.writeText(generatePitch()).then(() => {
+    document.getElementById('copy-pitch').textContent = '✓ Copied!';
+    setTimeout(() => document.getElementById('copy-pitch').textContent = '📋 Copy Pitch', 2000);
+  });
+});
+document.getElementById('evolve-btn').addEventListener('click', evolveReport);
+
+// Render chips
+document.getElementById('qa-chips').innerHTML = CHIPS.map(c => `<span class="qa-chip">${c}</span>`).join('');
+document.querySelectorAll('.qa-chip').forEach(chip => chip.addEventListener('click', () => askQuestion(chip.textContent)));
+
+// ═══ INIT ═══
+updateValuation('normal');
+renderProducts();
+renderPersonas();
+renderTodos();
+updatePitch();
+evolveReport();
+</script>
+</body>
+</html>
